@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket客户端</title>
+    <script src="https://cdn.bootcss.com/sockjs-client/0.3.4/sockjs.min.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.1/echarts.min.js"></script>
+</head>
+<body>
+
+
+<div id="main" style="width:800px;height:600px"></div>
+<script type="text/javascript">
+
+
+    let ws = null;
+
+
+
+    var option;
+
+
+
+
+    let targetUri = "/connect";
+
+    window.onload = function (){
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: [120, 200, 150, 80, 70, 110, 130],
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,		//开启显示
+                                position: 'top',	//在上方显示
+                                textStyle: {	    //数值样式
+                                    color: 'black',
+                                    fontSize: 16
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+
+        ws = new SockJS(targetUri);
+        ws.onopen = function () {
+            // myChart.setOption(option,true);
+        };
+        ws.onmessage = function (event) {
+            var chartDom = document.getElementById('main');
+            var myChart = echarts.init(chartDom);
+
+            var parse = JSON.parse(event.data);
+            // option.xAxis.data = parse.xAxisData;
+            option.series[0].data = parse.yAxisData;
+            myChart.setOption(option,true);
+            console.log(option)
+        };
+        ws.onclose = function () {
+            // setConnected(false);
+            // log('和服务端断开连接！')
+        }
+    }
+
+    // myChart.setOption(option,true);
+
+</script>
+
+</body>
+</html>
