@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/uninstallerIcon.ico</file>
+    </qresource>
+</RCC>
