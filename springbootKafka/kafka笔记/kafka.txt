@@ -1,0 +1,16 @@
+bin/kafka‐server‐start.sh ‐daemon config/server.properties		//kafka启动
+ ./kafka-topics.sh --bootstrap-server 192.168.131.128:9092 --list
+					//连接服务器							//查看所有主题		
+ ./kafka-topics.sh --bootstrap-server 192.168.131.128:9092 --topic topicsName --create --partitions 1 --replication-factor 3
+															//操作的主题名		//创建		//分区数		//分区副本数
+ ./kafka-topics.sh --bootstrap-server 192.168.131.128:9092 --topic topicsName --decribe								
+																			//查看主题详细信息
+
+															
+															
+															
+															
+															
+															
+															
+															
