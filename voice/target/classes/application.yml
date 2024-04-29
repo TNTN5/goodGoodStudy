@@ -1,0 +1,9 @@
+server:
+  context-path: / #项目名
+  port: 9065    #端口号
+  session:
+    timeout: 8000    #会话失效时间
+
+leenleda:
+  vosk:
+    model: D:\Data\IdeaProjects\voice\src\main\java\com\yzhhh\vosk\vosk-model-cn-0.22
